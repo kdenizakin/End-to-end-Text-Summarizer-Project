@@ -2,6 +2,7 @@
 from textSummarizer.constants import *
 from textSummarizer.utils.common import read_yaml, create_directories
 from textSummarizer.entity import DataReceiverConfig
+from textSummarizer.entity import DataValidationEntity
 
 
 class ConfigurationManager: 
@@ -14,7 +15,7 @@ class ConfigurationManager:
         create_directories([self.config.artifacts_root]) #artifacts_root: artifacts. Bu method ile "artifacts" isimli folder otomatik olarak oluşturulur.
         #"." kullanarak çağırmayı "ConfigBox"a borçluyuz.
 
-    def get_config(self):
+    def get_config_data_receiver(self):
         config = self.config.data_receiver #Alttakine erişiyoruz. read_yaml(config_filepath) ile bu config.yaml dosyasını okuduk.
         #data_data_receiver:
             #root_dir: artifacts/data_receiver
@@ -32,3 +33,22 @@ class ConfigurationManager:
         )
 
         return data_receiver_config
+    
+    def get_config_data_validation(self)-> DataValidationEntity: 
+       
+        create_directories([self.config.data_validation.root_dir]) #root_dir: artifacts/data_validation.
+
+        print(f"{self.config.data_validation}")
+        """ve alttakine erişiyoruz:
+         data_validation:
+            root_dir: artifacts/data_validation
+            status_file: artifacts/data_validation/status.txt
+            required_files: ["train","test","validation"] """
+
+        data_validation_config_obj = DataValidationEntity(
+            root_directory = self.config.data_validation.root_dir, 
+            status_file = self.config.data_validation.status_file,
+            required_files_list = self.config.data_validation.required_files,
+        ) 
+
+        return data_validation_config_obj

@@ -12,3 +12,11 @@ class DataReceiverConfig: #Bu bir python actual classı değildir bir Data Class
 #gerektiği zamanlarda kullanacağız.
 #Mesela "root_dir" çağırırsak "config.yaml" dosyası içerisindeki "artifacts/data_ingestion" pathini return edecek.
 #Bu bir ENTİTY'DİR.
+
+"""README > 3. Update entity """
+
+@dataclass(frozen=True)
+class DataValidationEntity: #Bu bir python actual classı değildir bir Data Class'tır.
+    root_directory: Path
+    status_file: str
+    required_files_list:list

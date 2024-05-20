@@ -5,6 +5,7 @@ from textSummarizer.logging import logger
 from textSummarizer.utils.common import get_size
 from textSummarizer.entity import DataReceiverConfig
 
+
 class DataReceiver:
     def __init__(self, data_receiver_config: DataReceiverConfig):
         self.config = data_receiver_config

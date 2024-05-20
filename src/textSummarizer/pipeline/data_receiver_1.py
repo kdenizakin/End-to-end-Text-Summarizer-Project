@@ -9,7 +9,7 @@ class DataReceiverTrainingPipeline:
     def main(self):
         try:
             config_manager_obj = ConfigurationManager()
-            data_receiver_config =  config_manager_obj.get_config()
+            data_receiver_config =  config_manager_obj.get_config_data_receiver()
             data_receiver = DataReceiver(data_receiver_config=data_receiver_config)
             data_receiver.download_data()
             data_receiver.extract_data()
