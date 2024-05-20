@@ -17,15 +17,15 @@ class ConfigurationManager:
     def get_config(self):
         config = self.config.data_receiver #Alttakine erişiyoruz. read_yaml(config_filepath) ile bu config.yaml dosyasını okuduk.
         #data_data_receiver:
-            #root_dir: artifacts/data_ingestion
+            #root_dir: artifacts/data_receiver
             #source_URL: https://github.com/kdenizakin/End-to-end-Text-Summarizer-Project/raw/main/text_summarizer_dataset.zip #bu URL'den datayı indirecek.
-            #local_data_file: artifacts/data_ingestion/data.zip #datayı bu foldera ve "data.zip" ismiyle indirecek.
-            #unzip_dir: artifacts/data_ingestion #datanın unzip edilmiş hali buraya download edilecek.
+            #local_data_file: artifacts/data_receiver/data.zip #datayı bu foldera ve "data.zip" ismiyle indirecek.
+            #unzip_dir: artifacts/data_receiver #datanın unzip edilmiş hali buraya download edilecek.
 
         create_directories([config.root_dir])
 
         data_receiver_config = DataReceiverConfig(
-            root_dir = config.root_dir, # config.root_dir = "artifacts/data_ingestion". Yani artifacts/data_ingestion isimli bir dosya oluşturulacak.
+            root_dir = config.root_dir, # config.root_dir = "artifacts/data_receiver". Yani artifacts/data_receiver isimli bir dosya oluşturulacak.
             source_URL = config.source_URL,
             local_data_file = Path(config.local_data_file),
             unzip_dir = Path(config.unzip_dir)
