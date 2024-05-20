@@ -1,0 +1,13 @@
+artifacts_root: artifacts #bu bir "artifacts" isimli dosya yaratır ve de tüm componentlerı buraya save eder.
+
+data_receiver:
+  root_dir: artifacts/data_receiver
+  source_URL: https://github.com/kdenizakin/End-to-end-Text-Summarizer-Project/raw/main/text_summarizer_dataset.zip #bu URL'den datayı indirecek.
+  local_data_file: artifacts/data_receiver/data.zip #datayı bu foldera ve "data.zip" ismiyle indirecek.
+  unzip_dir: artifacts/data_receiver #datanın unzip edilmiş hali buraya download edilecek.
+
+
+# Bu config.yaml dosyasının kullanılma amacı ileride bu directorylerin değiştirilmesi gerekirse sadece buradaki satırlarda değişiklik yapılacak.
+# Ve de manuel bir biçimde o dosyaya gidip modify etmeye gerek kalmayacak config dosyası kullanmanın güzelliği burada. Otomatik bir biçimde
+# bu dosya işlemlerini yapar.
+
