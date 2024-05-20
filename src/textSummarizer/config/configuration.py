@@ -3,6 +3,7 @@ from textSummarizer.constants import *
 from textSummarizer.utils.common import read_yaml, create_directories
 from textSummarizer.entity import DataReceiverConfig
 from textSummarizer.entity import DataValidationEntity
+from textSummarizer.entity import DataTransformationEntity
 
 
 class ConfigurationManager: 
@@ -52,3 +53,14 @@ class ConfigurationManager:
         ) 
 
         return data_validation_config_obj
+    
+    def get_config_data_transformation(self) -> DataTransformationEntity:
+        
+        create_directories([self.config.data_transformation.root_dir])
+
+        """ConfigBox kullanmadan böyle de attributelar çağrılabilir."""
+        return DataTransformationEntity(
+            root_dir = self.config.data_transformation.root_dir,
+            data_path = self.config.data_transformation.data_path,
+            tokenizer = self.config.data_transformation.tokenizer
+        )

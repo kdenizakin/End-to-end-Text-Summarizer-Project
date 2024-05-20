@@ -20,3 +20,12 @@ class DataValidationEntity: #Bu bir python actual classı değildir bir Data Cla
     root_directory: Path
     status_file: str
     required_files_list:list
+
+"""README > 3. Update entity """
+
+
+@dataclass(frozen=True)
+class DataTransformationEntity:
+    root_dir: Path #artifacts/data_transformation
+    data_path: Path #artifacts/data_receiver/samsum_dataset
+    tokenizer: Path #google/pegasus-cnn-dailymail. Automatically download the tokenizer.
