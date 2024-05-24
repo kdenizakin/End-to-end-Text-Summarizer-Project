@@ -10,7 +10,8 @@ from box import ConfigBox #YAML dosyalarını "ConfigBox" tipinde okumamızın n
 from pathlib import Path
 from typing import Any
 
-@ensure_annotations #Bunun nedeni de parametre olarak kullandığımız değişkenlerin tipleri, fonksiyonun çağırırken başka tipteki değişkenler vererek çağırınca değişmesin diye.
+@ensure_annotations #Bunun nedeni de parametre olarak kullandığımız değişkenlerin tipleri,
+#fonksiyonun çağırırken başka tipteki değişkenler vererek çağırınca değişmesin diye.
 #Yani bir nevi dynamic type binding gibi bir çevirme yapılmasın diye kullanılır.
 def read_yaml(pathh: Path) -> ConfigBox:
     try:

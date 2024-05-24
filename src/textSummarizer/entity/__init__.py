@@ -29,3 +29,29 @@ class DataTransformationEntity:
     root_dir: Path #artifacts/data_transformation
     data_path: Path #artifacts/data_receiver/samsum_dataset
     tokenizer: Path #google/pegasus-cnn-dailymail. Automatically download the tokenizer.
+
+
+@dataclass(frozen=True)
+class ModelTrainingEntity:
+    root_dir: Path 
+    data_path: Path 
+    checkpoints: Path 
+    num_train_epochs: int
+    warmup_steps: int
+    per_device_train_batch_size: int
+    weight_decay: float
+    logging_steps: int
+    evaluation_strategy: str
+    eval_steps: int
+    save_steps: float
+    gradient_accumulation_steps: int
+
+
+
+@dataclass(frozen=True)
+class ModelEvaluationEntity:
+    root_dir: Path 
+    data_path: Path 
+    model_path: Path 
+    tokenizer_path:Path
+    metric_file_name: Path

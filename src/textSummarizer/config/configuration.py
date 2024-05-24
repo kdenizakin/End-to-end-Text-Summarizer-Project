@@ -4,6 +4,8 @@ from textSummarizer.utils.common import read_yaml, create_directories
 from textSummarizer.entity import DataReceiverConfig
 from textSummarizer.entity import DataValidationEntity
 from textSummarizer.entity import DataTransformationEntity
+from textSummarizer.entity import ModelTrainingEntity
+from textSummarizer.entity import ModelEvaluationEntity
 
 
 class ConfigurationManager: 
@@ -63,4 +65,39 @@ class ConfigurationManager:
             root_dir = self.config.data_transformation.root_dir,
             data_path = self.config.data_transformation.data_path,
             tokenizer = self.config.data_transformation.tokenizer
+        )
+    
+
+    def get_config_model_trainer(self) -> ModelTrainingEntity:
+        
+        parameters_of_the_model = self.params.TrainingParameters
+
+        create_directories([self.config.model_training.root_dir])
+
+        """ConfigBox kullanmadan böyle de attributelar çağrılabilir."""
+        return ModelTrainingEntity(
+            root_dir= self.config.model_training.root_dir, 
+            data_path=self.config.model_training.data_path,
+            checkpoints=self.config.model_training.model_checkpoints,
+            num_train_epochs= parameters_of_the_model.num_train_epochs,
+            warmup_steps=parameters_of_the_model.warmup_steps,
+            per_device_train_batch_size= parameters_of_the_model.per_device_train_batch_size,
+            weight_decay = parameters_of_the_model.weight_decay,
+            logging_steps = parameters_of_the_model.logging_steps,
+            evaluation_strategy = parameters_of_the_model.evaluation_strategy,
+            eval_steps = parameters_of_the_model.eval_steps,
+            save_steps = parameters_of_the_model.save_steps,
+            gradient_accumulation_steps = parameters_of_the_model.gradient_accumulation_steps
+        )
+    
+    def get_config_model_evaluation(self) -> ModelEvaluationEntity:
+
+        config_model_evaluation = self.config.model_evaluation
+        create_directories([config_model_evaluation.root_dir])
+        return ModelEvaluationEntity(
+            root_dir = config_model_evaluation.root_dir,
+            data_path = config_model_evaluation.data_path,
+            model_path = config_model_evaluation.model_path,
+            tokenizer_path = config_model_evaluation.tokenizer_path,
+            metric_file_name = config_model_evaluation.metric_file_name
         )

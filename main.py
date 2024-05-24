@@ -1,6 +1,8 @@
 from textSummarizer.pipeline.data_receiver_1 import DataReceiverTrainingPipeline
 from textSummarizer.pipeline.data_validator_2 import DataValidationPipeline
 from textSummarizer.pipeline.data_transformer_3 import DataTransformerPipeline
+from textSummarizer.pipeline.model_training_4 import ModelTrainingPipeline
+from textSummarizer.pipeline.model_evaluation_5 import ModelEvaluationPipeline
 
 
 from textSummarizer.logging import logger
@@ -36,5 +38,29 @@ try:
 
 except Exception as e:
     logger.error(f"Data transformation has been failed.\n \n")
+    logger.error(f"Error: {e}")
+    raise e
+
+""" try:
+    logger.info(f"Model Training has been started.")
+    model_training_pipeline_instance = ModelTrainingPipeline()
+    model_training_pipeline_instance.main()
+    logger.info(f"Model Training has been completed.\n \n")
+
+except Exception as e:
+    logger.error(f"Model Training has been failed.\n \n")
+    logger.error(f"Error: {e}")
+    raise e """
+
+
+
+try:
+    logger.info(f"Model Evaluation has been started.")
+    model_evaluation_pipeline_instance = ModelEvaluationPipeline()
+    model_evaluation_pipeline_instance.main()
+    logger.info(f"Model Evaluation has been completed.\n \n")
+
+except Exception as e:
+    logger.error(f"Model Evaluation has been failed.\n \n")
     logger.error(f"Error: {e}")
     raise e

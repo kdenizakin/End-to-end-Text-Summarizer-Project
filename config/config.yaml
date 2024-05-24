@@ -18,12 +18,25 @@ data_validation:
   required_files: ["train","test","validation"]
 
 
-
-
 data_transformation:
   root_dir: artifacts/data_transformation #Bu dosya içine dataya uygulanan transformationlardan sonra ortaya çıkan yeni data konulacaktır.
   data_path: artifacts/data_receiver/samsum_dataset
   tokenizer: google/pegasus-cnn_dailymail
+
+
+model_training:
+  root_dir: artifacts/model_training 
+  data_path: artifacts/data_transformation/samsum_dataset
+  model_checkpoints: google/pegasus-cnn_dailymail
+
+
+model_evaluation:
+  root_dir: artifacts/model_evaluation 
+  data_path: artifacts/data_transformation/samsum_dataset
+  model_path: artifacts/model_training/model_pegasus
+  tokenizer_path: artifacts/model_training/tokenizer
+  metric_file_name: artifacts/model_evaluation/metrics.csv
+  
 
 
 
