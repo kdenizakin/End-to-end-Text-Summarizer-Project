@@ -3,12 +3,9 @@ from transformers import AutoTokenizer
 from transformers import pipeline
 
 
-
 class PredictionPipeline:
     def __init__(self):
         self.config = ConfigurationManager().get_config_model_evaluation()
-
-
 
     def predicts(self, given_text):
         tokenizer = AutoTokenizer.from_pretrained(self.config.tokenizer_path)
@@ -16,9 +13,9 @@ class PredictionPipeline:
         pipeline_obj = pipeline("summarization", model=model_path,tokenizer=tokenizer)
 
 
-        gen_kwargs = {"length_penalty": 0.8, "num_beams":8, "max_length": 60}
+        gen_kwargs = {"length_penalty": 0.8, "num_beams":8, "max_length": 200}
 
-        print("Dialogue:")
+        print("Given input:")
         print(given_text)
 
 

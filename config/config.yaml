@@ -33,7 +33,7 @@ model_training:
 model_evaluation:
   root_dir: artifacts/model_evaluation 
   data_path: artifacts/data_transformation/samsum_dataset
-  model_path: artifacts/model_training/model_pegasus
+  model_path: artifacts/model_training/model_pegasus_epoch10
   tokenizer_path: artifacts/model_training/tokenizer
   metric_file_name: artifacts/model_evaluation/metrics.csv
   

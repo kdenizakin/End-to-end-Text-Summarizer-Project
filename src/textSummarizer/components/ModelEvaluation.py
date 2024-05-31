@@ -5,7 +5,6 @@ import pandas as pd
 from tqdm import tqdm
 from textSummarizer.entity import ModelEvaluationEntity
 
-
 class ModelEvaluation:
     def __init__(self, config: ModelEvaluationEntity):
         self.config = config
@@ -14,24 +13,20 @@ class ModelEvaluation:
         for i in range(0,len(list_elements), batch_size):
             yield list_elements[i:i+batch_size]
 
-    def calculate_metrics(self, dataset, metric, model, tokenizer, batch_size = 16, device = "cpu",
-                      column_text="article",
-                      column_summary="highlights"):
+    def calculate_metrics(self, dataset, metric, model, tokenizer, batch_size = 16, device = "cpu", column_text="article", column_summary="highlights"):
         article_batches = list(self.generate_batches_from_the_list(dataset[column_text], batch_size))
         target_batches = list(self.generate_batches_from_the_list(dataset[column_summary], batch_size))
 
         for article_batch, target_batch in tqdm(zip(article_batches, target_batches), total=len(article_batches)):
             inputs = tokenizer(article_batch, max_length=1024, truncation=True, padding="max_length", return_tensors = "pt")
             summaries = model.generate(input_ids = inputs["input_ids"].to(device), attention_mask=inputs["attention_mask"].to(device), 
-                                       length_penalty=0.8, num_beams=8, max_length=128)
+                                       length_penalty=0.8, num_beams=8, max_length=200)
 
             decoded_summaries=[tokenizer.decode(s,skip_special_tokens=True, clean_up_tokenization_spaces=True) for s in summaries]
 
-            decoded_summaries = [d.replace("", " ") for d in decoded_summaries]
 
             metric.add_batch(predictions=decoded_summaries, references=target_batch)
 
-        #  Finally compute and return the ROUGE scores.
         score = metric.compute()
         return score
     
@@ -52,4 +47,4 @@ class ModelEvaluation:
         rouge_dict = dict((rn, score[rn].mid.fmeasure ) for rn in rouge_names )
 
         df = pd.DataFrame(rouge_dict, index = ['pegasus'] )
-        df.to_csv(self.config.metric_file_name, index=False)
+        df.to_csv(self.config.metric_file_name, index=False) #metrics.csv isimli dosyaya metric sonuçlarının yazılması

@@ -39,19 +39,19 @@ try:
 except Exception as e:
     logger.error(f"Data transformation has been failed.\n \n")
     logger.error(f"Error: {e}")
-    raise e
+    raise e 
 
-""" try:
+try:
     logger.info(f"Model Training has been started.")
     model_training_pipeline_instance = ModelTrainingPipeline()
-    model_training_pipeline_instance.main()
-    logger.info(f"Model Training has been completed.\n \n")
+    #model_training_pipeline_instance.main()
+    #logger.info(f"Model Training has been completed.\n \n")
 
 except Exception as e:
     logger.error(f"Model Training has been failed.\n \n")
     logger.error(f"Error: {e}")
-    raise e """
-
+    raise e 
+ 
 
 
 try:

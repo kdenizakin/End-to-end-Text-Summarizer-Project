@@ -5,12 +5,13 @@ from textSummarizer.logging import logger
 
 class ModelTrainingPipeline:
     def __init__(self):
-        pass
+        self.config = ConfigurationManager()
+        self.model_trainer_config = self.config.get_config_model_trainer()
+
+
     def main(self):
         try:
-            config = ConfigurationManager()
-            model_trainer_config = config.get_config_model_trainer()
-            model_trainer_config = ModelTrainer(config=model_trainer_config)
+            model_trainer_config = ModelTrainer(config=self.model_trainer_config)
             model_trainer_config.train()
         except Exception as e:
             raise e
